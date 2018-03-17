@@ -66,9 +66,11 @@ int compute(char** parsed, char* OperationStack, double* OperandStack) {
 			case '9':
 			case '0':
 			 OperandStack[OperandCounter++] = atoi(parsed[i]);
+			 printf("Operand: %lf\n", OperandStack[OperandCounter-1] );
 				break;
 			case '+':
 			case '-':
+				printf("Operation: %c\n", OperationStack[OperationCounter-1] );
 				if(OperationStack[OperationCounter-1] == '*' || OperationStack[OperationCounter-1] == '/') {
 					double a2 = OperandStack[--OperandCounter];
 			
@@ -90,12 +92,13 @@ int compute(char** parsed, char* OperationStack, double* OperandStack) {
 							break;
 					}
 					OperandStack[OperandCounter++] = result;
-					//printf("%lf&%lf = %lf",a1, a2,OperandStack[OperandCounter-1]);
+					printf("%lf&%lf = %lf\n",a1, a2,OperandStack[OperandCounter-1]);
 					break;
 				}
 			case '*':
 			case '/':
 				OperationStack[OperationCounter++] = parsed[i][0];
+				 printf("Operation: %c\n", OperationStack[OperationCounter-1] );
 				break;
 		}
 		
