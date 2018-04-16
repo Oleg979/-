@@ -39,7 +39,7 @@ void freeTree(Node* root) {
 int main() {
 	Node* root = (Node*)calloc(sizeof(Node),1);
 	int arr[] = {2,6,4,7,9};
-	int size = (sizeof(arr)/sizeof(arr[0]))-1;
+	int size = (sizeof(arr)/sizeof(arr[0]));
 	root->val = arr[0];
 	
 	for(int i=1; i<size; i++) {
