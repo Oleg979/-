@@ -9,14 +9,14 @@
 #include <fstream>
 using namespace std;
 
-//Функция для перевода в двоичную систему
+//Ôóíêöèÿ äëÿ ïåðåâîäà â äâîè÷íóþ ñèñòåìó
 unsigned integerToBinary(unsigned k) {
     if (k == 0) return 0;
     if (k == 1) return 1;                       
     return (k % 2) + 10 * integerToBinary(k / 2);
 }
 
-//Функция для создания строки из 8 битов
+//Ôóíêöèÿ äëÿ ñîçäàíèÿ ñòðîêè èç 8 áèòîâ
 string BinaryIntToString (int a) {
     ostringstream temp;
     temp << a;
@@ -28,7 +28,7 @@ string BinaryIntToString (int a) {
 }
 
 
-//Найденная в интернете функция split
+//Íàéäåííàÿ â èíòåðíåòå ôóíêöèÿ split
 vector<string> split(string stringToBeSplitted, string delimeter) {
 	vector<string> splittedString;
 	int startIndex = 0;
@@ -50,35 +50,43 @@ vector<string> split(string stringToBeSplitted, string delimeter) {
 }
 
 
+bool hasEnding (string const &fullString, string const &ending) {
+    if (fullString.length() >= ending.length()) {
+        return (0 == fullString.compare (fullString.length() - ending.length(), ending.length(), ending));
+    } else {
+        return false;
+    }
+}
+
 
 int main() {
-	setlocale(LC_ALL, "rus");
+		setlocale(LC_ALL, "rus");
 	
-		//Открываем файл
+		//Îòêðûâàåì ôàéë
 		FILE* file = fopen("C:\\fileForEncode.txt","r");
 		if(!file) {
 			cerr << "File not found!";
 			exit(1);
 		}
 		
-		//Находим размер файла
+		//Íàõîäèì ðàçìåð ôàéëà
 		fseek(file , 0 , SEEK_END);                         
   		long size = ftell(file);                            
   		rewind(file); 
 		
-		//Выделяем память под содержимое файла
+		//Âûäåëÿåì ïàìÿòü ïîä ñîäåðæèìîå ôàéëà
 		char* buffer = new char[size];
 		if(!buffer) {
 			cerr << "Memory error!";
 			exit(2);
 		}
 		
-		//Читаем содержимое
+		//×èòàåì ñîäåðæèìîå
 		fread(buffer, 1, size, file); 
 		
 		cout << "Secret word: " << buffer << "\n";
 		
-		//Получаем битовую последовательность
+		//Ïîëó÷àåì áèòîâóþ ïîñëåäîâàòåëüíîñòü
 		string bitSeq = "";
 		for(int i = 0; i < size; i++){
 			bitSeq += BinaryIntToString(integerToBinary(buffer[i]));
@@ -88,7 +96,7 @@ int main() {
 		
 		fclose(file);
 		
-		//Открываем файл
+		//Îòêðûâàåì ôàéë
 		FILE* file2read = fopen("C:\\fileToPast.txt","r");
 	
 		if(!file2read) {
@@ -99,30 +107,82 @@ int main() {
 		char* str = new char[50];
 		string res = "";
 		
-		//Считываем содержимое большого файла
+		//Ñ÷èòûâàåì ñîäåðæèìîå áîëüøîãî ôàéëà
 		while (fgets (str, 50, file2read) != NULL) {
 			res+=str;
 		}
 		fclose(file2read);
 		
 		
-		//Разбиваем содержимое файла на строки
+		//Ðàçáèâàåì ñîäåðæèìîå ôàéëà íà ñòðîêè
 		vector<string> splittedStrings = split(res, "\n");
 		
 		res = "";
-		//Дописываем пробелы в тех местах, где в битовой последовательности встречается единица
+		//Äîïèñûâàåì ïðîáåëû â òåõ ìåñòàõ, ãäå â áèòîâîé ïîñëåäîâàòåëüíîñòè âñòðå÷àåòñÿ åäèíèöà
 		for(int i = 0; i < splittedStrings.size(); i++) {
 			if(i < bitSeq.length())
 			splittedStrings[i] += bitSeq[i] == '1' ? " " : "";
 			res += splittedStrings[i] + "\n";
 		}
 		
-		//Открываем поток и пишем в файл
+		//Îòêðûâàåì ïîòîê è ïèøåì â ôàéë
 		ofstream out("C:\\fileToPast.txt");
    		out << res;
     	
 		
 		out.close();	
-		free(buffer);	
+		free(buffer);
+		
+		
+		
+		//Îòêðûâàåì ôàéë
+		FILE* file2 = fopen("C:\\fileToPast.txt","r");
+	
+		if(!file2) {
+			cerr << "File2 not found!";
+			exit(1);
+		}
+		
+		str = new char[50];
+		res = "";
+		
+		//Ñ÷èòûâàåì ñîäåðæèìîå áîëüøîãî ôàéëà
+		while (fgets (str, 50, file2) != NULL) {
+			res+=str;
+		}
+
+			
+		fclose(file2);
+		
+		//Ðàçáèâàåì ñîäåðæèìîå ôàéëà íà ñòðîêè
+		vector<string>Strings = split(res, "\n");
+		
+		
+		cout << Strings.size() << endl;
+		
+		string bits = "";
+		
+	
+		for(int i = 0; i < Strings.size(); i++) {
+			bits += hasEnding(Strings[i], " ") ? "1" : "0";
+		}
+		
+		
+		int count = 0;
+		int* chars = new int[bits.length()/8];
+		
+		cout << bits;
+		
+		file2 = fopen("C:\\fileToDecode.txt","w");
+		
+		for(int i = 0; count < bits.length()/8; i = i+8, count++) {
+			int buf =  strtol(bits.substr(i,8).c_str(), NULL, 2);
+			cout << buf << endl;
+			putc(buf, file2);
+		}
+		
+		
+		fclose(file2);
+			
 	}
 ```
