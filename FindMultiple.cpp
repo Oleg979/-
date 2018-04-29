@@ -15,6 +15,7 @@ void find(int n) {
 			find(n/i);
 			return;
 		}
+	cerr << "No results";
 	exit(1);
 } 
 
