@@ -5,7 +5,7 @@ int res = 0;
 int offset = 0;
 
 void find(int n) {
-	if(n == 1) return;
+	if(n == 1 || n >= 10) return;
 	for(int i = 9; i > 0; i--)
 		if(n % i == 0) {
 			int buf = i;
