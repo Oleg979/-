@@ -5,8 +5,8 @@ int res = 0;
 int offset = 0;
 
 void find(int n) {
-	if(n == 1 || n >= 10) return;
-	for(int i = 9; i > 0; i--)
+	if(n == 1) return;
+	for(int i = 9; i > 1; i--)
 		if(n % i == 0) {
 			int buf = i;
 			for(int j = 0; j < offset; j++) buf*=10;
@@ -15,6 +15,7 @@ void find(int n) {
 			find(n/i);
 			return;
 		}
+	exit(1);
 } 
 
 
