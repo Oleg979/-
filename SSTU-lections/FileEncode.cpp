@@ -9,14 +9,12 @@
 #include <fstream>
 using namespace std;
 
-//Ôóíêöèÿ äëÿ ïåðåâîäà â äâîè÷íóþ ñèñòåìó
 unsigned integerToBinary(unsigned k) {
     if (k == 0) return 0;
     if (k == 1) return 1;                       
     return (k % 2) + 10 * integerToBinary(k / 2);
 }
 
-//Ôóíêöèÿ äëÿ ñîçäàíèÿ ñòðîêè èç 8 áèòîâ
 string BinaryIntToString (int a) {
     ostringstream temp;
     temp << a;
@@ -27,8 +25,6 @@ string BinaryIntToString (int a) {
     return res;
 }
 
-
-//Íàéäåííàÿ â èíòåðíåòå ôóíêöèÿ split
 vector<string> split(string stringToBeSplitted, string delimeter) {
 	vector<string> splittedString;
 	int startIndex = 0;
@@ -62,31 +58,31 @@ bool hasEnding (string const &fullString, string const &ending) {
 int main() {
 		setlocale(LC_ALL, "rus");
 	
-		//Îòêðûâàåì ôàéë
+		
 		FILE* file = fopen("C:\\fileForEncode.txt","r");
 		if(!file) {
 			cerr << "File not found!";
 			exit(1);
 		}
 		
-		//Íàõîäèì ðàçìåð ôàéëà
+		
 		fseek(file , 0 , SEEK_END);                         
   		long size = ftell(file);                            
   		rewind(file); 
 		
-		//Âûäåëÿåì ïàìÿòü ïîä ñîäåðæèìîå ôàéëà
+		
 		char* buffer = new char[size];
 		if(!buffer) {
 			cerr << "Memory error!";
 			exit(2);
 		}
 		
-		//×èòàåì ñîäåðæèìîå
+		
 		fread(buffer, 1, size, file); 
 		
 		cout << "Secret word: " << buffer << "\n";
 		
-		//Ïîëó÷àåì áèòîâóþ ïîñëåäîâàòåëüíîñòü
+		
 		string bitSeq = "";
 		for(int i = 0; i < size; i++){
 			bitSeq += BinaryIntToString(integerToBinary(buffer[i]));
@@ -96,7 +92,7 @@ int main() {
 		
 		fclose(file);
 		
-		//Îòêðûâàåì ôàéë
+		
 		FILE* file2read = fopen("C:\\fileToPast.txt","r");
 	
 		if(!file2read) {
@@ -107,25 +103,25 @@ int main() {
 		char* str = new char[50];
 		string res = "";
 		
-		//Ñ÷èòûâàåì ñîäåðæèìîå áîëüøîãî ôàéëà
+		
 		while (fgets (str, 50, file2read) != NULL) {
 			res+=str;
 		}
 		fclose(file2read);
 		
 		
-		//Ðàçáèâàåì ñîäåðæèìîå ôàéëà íà ñòðîêè
+		
 		vector<string> splittedStrings = split(res, "\n");
 		
 		res = "";
-		//Äîïèñûâàåì ïðîáåëû â òåõ ìåñòàõ, ãäå â áèòîâîé ïîñëåäîâàòåëüíîñòè âñòðå÷àåòñÿ åäèíèöà
+		
 		for(int i = 0; i < splittedStrings.size(); i++) {
 			if(i < bitSeq.length())
 			splittedStrings[i] += bitSeq[i] == '1' ? " " : "";
 			res += splittedStrings[i] + "\n";
 		}
 		
-		//Îòêðûâàåì ïîòîê è ïèøåì â ôàéë
+		
 		ofstream out("C:\\fileToPast.txt");
    		out << res;
     	
@@ -135,7 +131,7 @@ int main() {
 		
 		
 		
-		//Îòêðûâàåì ôàéë
+		
 		FILE* file2 = fopen("C:\\fileToPast.txt","r");
 	
 		if(!file2) {
@@ -146,15 +142,15 @@ int main() {
 		str = new char[50];
 		res = "";
 		
-		//Ñ÷èòûâàåì ñîäåðæèìîå áîëüøîãî ôàéëà
+		
 		while (fgets (str, 50, file2) != NULL) {
 			res+=str;
 		}
 
 			
 		fclose(file2);
-		
-		//Ðàçáèâàåì ñîäåðæèìîå ôàéëà íà ñòðîêè
+	
+	
 		vector<string>Strings = split(res, "\n");
 		
 		
