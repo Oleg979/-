@@ -1,7 +1,7 @@
 const getUserById = id => {
 
     const params = {
-        access_token: '29f482149532ce1b3a0682c53158df8fe0190ae1b03ee8fca8553d00f75f263b5e4f0427ba05f6ef2aa9d',
+        access_token: '...',
         user_ids: id,
         fields: 'photo_max_orig, status, online',
         v: 'V'
