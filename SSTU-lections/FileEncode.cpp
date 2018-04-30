@@ -1,4 +1,3 @@
-```cpp
 #include <stdio.h>
 #include <iostream>
 #include <malloc.h>
@@ -181,4 +180,3 @@ int main() {
 		fclose(file2);
 			
 	}
-```
