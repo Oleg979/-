@@ -11,24 +11,21 @@ int* swap(int* arr, int x, int y) {
 }
 
 int* toPyramid(int* arr, int n) {
-	int len = --n;
-	int num = n;
-	while(num > 1) {
-		cout << num << endl;
-		if(arr[num] < arr[num/2]) {
-			num = --len;
-			continue;
-		}
-		while(arr[num] > arr[num/2] && num > 0 &&  num/2 > 0) {
-			swap(arr, num, num/2);
-			num = num/2;
-		}
-		num = len;
-	}
-
-	if(arr[n] < arr[n-1]) swap(arr, n, n-1);
+	int* res = new int[n];
+	res[0] = arr[0];
+	int num = 1;
+	int buf = num;
 	
-	return arr;
+	while(num < n) {
+		res[num] = arr[num];
+		buf = num;
+		while(res[buf] > res[(buf-1)/2] && (buf-1)/2 >= 0 && buf >= 0) {
+			swap(res, buf, (buf-1)/2);
+			buf = (buf-1)/2;
+		}
+		num++;
+	}
+	return res;
 }
 
 int* toSorted(int* arr, int n) {
@@ -44,22 +41,18 @@ int* toSorted(int* arr, int n) {
 			if(buf + 1 < n && buf + 2 < n) num = buf;
 		}	
 	}
-	
+	if(arr[0] > arr[1]) swap(arr, 0, 1);
 	return arr;
 }
 
 int main() {
-	int arr[] = {-100,3,-1,2,5,4};
+	
+	int arr[] = {10,5,6,2,-6,-3,0,1,4,2,3,-11,5,13};
 	int n = sizeof(arr)/sizeof(arr[0]);
 	
-//	int* pyramid = toPyramid(arr, n);
-	//for(int i = 1; i < n; i++)
-	//	cout << endl << pyramid[i] << " ";
-	
-	int pyramid[] = {5,4,2,-1,3};
-	 n = sizeof(pyramid)/sizeof(pyramid[0]);
-	 
+	int* pyramid = toPyramid(arr, n);
 	int* sorted = toSorted(pyramid, n);
-	for(int i = 1; i < n; i++)
-		cout << endl << sorted[i] << " ";
+	
+	for(int i = 0; i < n; i++)
+		cout << sorted[i] << " " << endl;
 }
