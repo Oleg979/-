@@ -7,7 +7,7 @@ int** findMinor(int** matrix, int x, int y, int dim) {
 	
 	int** minor = (int**)malloc((dim-1) * sizeof(int*));
 	for(int i = 0; i < dim; i++) 
-		minor[i] = (int*)malloc((dim-1) *sizeof(int));
+		minor[i] = (int*)malloc((dim-1) * sizeof(int));
 
 	int curX = 0, curY = 0;
 	for(int i = 0; i < dim; i++) 	
