@@ -45,6 +45,7 @@ int calc(int** matrix, int dim, int res = 0) {
 		else 
 			minorVal = calc(minor, dim-1);
 		
+		free(minor);
 		cout << minorVal << " + ";
 		buf *= minorVal;
 		res += buf;
@@ -70,5 +71,6 @@ int main() {
 	}
 	
 	cout << "Result: " << calc(matrix, dim);
+	free(matrix);
 }
 
