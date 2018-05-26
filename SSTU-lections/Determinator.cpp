@@ -4,20 +4,24 @@ using namespace std;
 
 
 int** findMinor(int** matrix, int x, int y, int dim) {
+	
 	int** minor = (int**)malloc((dim-1) * sizeof(int*));
-	for(int i = 0; i < dim; i++) {
+	for(int i = 0; i < dim; i++) 
 		minor[i] = (int*)malloc((dim-1) *sizeof(int));
-	}
+
 	int curX = 0, curY = 0;
 	for(int i = 0; i < dim; i++) 	
 		for(int j = 0; j < dim; j++)  
 			if(i != x && j != y) {
+				
 				minor[curX][curY++] = matrix[i][j];
 				if(curY == dim-1) {
 					curX++;
 					curY = 0;
 				}
+				
 			}
+			
 	return minor;
 }
 
@@ -36,12 +40,10 @@ int calc(int** matrix, int dim, int res = 0) {
 		
 		minor = findMinor(matrix, 0, i, dim);
 		
-		if(dim - 1 == 2) {
+		if(dim - 1 == 2) 
 			minorVal = minor[0][0] * minor[1][1] - minor[0][1] * minor[1][0]; 
-		}
-		else {
+		else 
 			minorVal = calc(minor, dim-1);
-		}
 		
 		cout << minorVal << " + ";
 		buf *= minorVal;
