@@ -1,3 +1,4 @@
+```java
 package generators;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -97,3 +98,4 @@ public class DungeonGenerator {
         new DungeonGenerator(30,100).print();
     }
 }
+```
