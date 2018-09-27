@@ -266,6 +266,16 @@ class Program
             
             AdminMenu();
         }
+    
+        static void AddPlane()
+        {
+            line();
+            w("Enter the name of the new plane: ");
+            var res = rl();
+            ms.AddPlane(new Plane(res));
+            w("Added successfully.");
+            AdminMenu();
+        }
 
         static void ShowAllPlanes()
         {
