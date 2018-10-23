@@ -6,8 +6,9 @@ x5 <- seq(1, 6, by = 3)
 x6 <- seq(1.575, 5.125, by = 0.05)
 x7 <- seq(17)
 
-mat <- matrix(data = rnorm (100, mean = 100, sd = 50), nrow = 10, ncol = 10)
-
-x8 <- seq(10)
-
+A <- matrix(data = rnorm (100, mean = 100, sd = 50), nrow = 10, ncol = 10)
+X <- seq(10)
+mat1 <- A * X
+mat2 <- A %*% X
+B <- c(mat2)
 
