@@ -1,3 +1,4 @@
+help(seq)
 x1 <- seq(0, 1, length.out = 11)
 x2 <- seq(stats::rnorm(20)) 
 x3 <- seq(1, 9, by = 2)     
