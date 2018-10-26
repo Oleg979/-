@@ -20,7 +20,7 @@ B <- A%*%X
 solve(A,B) 
  
 HousePrice <- read.table(file="houses.data") 
-HousePrice1 <- read.table(file="houses1.data, header = TRUE") 
+HousePrice1 <- read.table(file="houses1.data", header = TRUE) 
 HP <- edit(HousePrice) 
 write.table(HP, file="myframe.txt", quote = FALSE, row.names = FALSE) 
 HousePrice$Rooms 
