@@ -46,3 +46,37 @@ plot(sin, 0, 2*pi)
 plot(cos, 0, 2*pi)
 plot(exp, 0, 5)
 plot(log, 0, 10)
+
+
+# a 2-dimensional example
+x <- rbind(matrix(rnorm(100, sd = 0.3), ncol = 2),
+matrix(rnorm(100, mean = 1, sd = 0.3), ncol = 2))
+colnames(x) <- c("x", "y")
+(cl<- kmeans(x, 2))
+plot(x, col = cl$cluster)
+points(cl$centers, col = 1:2, pch = 8, cex = 2)
+
+(cl<- kmeans(x, 3))
+png(filename="1.png")
+plot(x, col = cl$cluster)
+points(cl$centers, col = 1:2, pch = 8, cex = 2)
+
+data <- cbind(iris$Petal.Length, iris$Petal.Width)
+
+x <- data
+colnames(x) <- c("x", "y")
+(cl<- kmeans(x, 3))
+png(filename="2.png")
+plot(x, col = cl$cluster)
+points(cl$centers, col = 1:2, pch = 8, cex = 2)
+dev.off()
+
+mydata<-data
+wss<-(nrow(mydata)-1)*sum(apply(mydata,2,var))
+for(i in 2:15)wss[i]<-sum(kmeans(mydata, centers=i)$withinss)
+plot(1:15, wss, type="b", xlab="Number of Clusters",
+ylab="Within groups sum of squares",
+main="Assessing the Optimal Number of Clusters with the Elbow Method",
+pch=20, cex=2)
+
+
