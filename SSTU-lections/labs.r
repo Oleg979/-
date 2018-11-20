@@ -68,7 +68,7 @@ colnames(x) <- c("x", "y")
 (cl<- kmeans(x, 3))
 png(filename="2.png")
 plot(x, col = cl$cluster)
-points(cl$centers, col = 1:2, pch = 8, cex = 2)
+points(cl$centers, col = 1:3, pch = 8, cex = 2)
 dev.off()
 
 mydata<-data
