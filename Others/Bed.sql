@@ -14,7 +14,6 @@ Education VARCHAR(50) NOT NULL ,
 
 PRIMARY KEY (`ID`) ,
 CONSTRAINT check_employee CHECK (Age >= 18 AND `Hiring date` >= `01.01.2000`)
-  
 )
 
 CREATE TABLE Documents (
@@ -25,7 +24,6 @@ ID INT NOT NULL AUTO_INCREMENT ,
 
 PRIMARY KEY (`ID`),
 FOREIGN KEY (`Type ID`) REFERENCES Types(ID) ON DELETE RESTRICT ON UPDATE CASCADE
-  
 )
 
 
