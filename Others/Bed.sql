@@ -62,3 +62,4 @@ FOREIGN KEY (`Employee ID`) REFERENCES Employees(ID) ON DELETE RESTRICT ON UPDAT
 
 
 https://www.citusdata.com/blog/2018/05/15/fun-with-sql-recursive-ctes/
+пол стаж работы
