@@ -60,3 +60,5 @@ FOREIGN KEY (`Document ID`) REFERENCES Documents(ID) ON DELETE RESTRICT ON UPDAT
 FOREIGN KEY (`Employee ID`) REFERENCES Employees(ID) ON DELETE RESTRICT ON UPDATE CASCADE
 )
 
+
+https://www.citusdata.com/blog/2018/05/15/fun-with-sql-recursive-ctes/
